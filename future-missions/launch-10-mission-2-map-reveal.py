@@ -8,7 +8,7 @@ NORMAL_SPEED = 180
 ATTACHMENT_UP_POSITION = 170
 TURN_SPEED = 80
 FIRST_TURN_ANGLE = 50
-SECOND_TURN_ANGLE = -5
+SECOND_TURN_ANGLE = -20
 THIRD_TURN_ANGLE = 108
 FOURTH_TURN_ANGLE = 170
 
@@ -68,7 +68,7 @@ async def main():
     motor_pair.stop(motor_pair.PAIR_1)
 
     # Move backward
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, -50, 0, velocity=NORMAL_SPEED)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, -70, 0, velocity=NORMAL_SPEED)
     motor_pair.stop(motor_pair.PAIR_1)
 
     # Bring attachment to mid position
@@ -80,11 +80,11 @@ async def main():
 
 
     # Move forward
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 100, 0, velocity=NORMAL_SPEED)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 20, 0, velocity=NORMAL_SPEED)
     motor_pair.stop(motor_pair.PAIR_1)
 
-    # # Bring attachment to mid position
-    # await motor.run_for_degrees(port.D, ATTACHMENT_UP_POSITION, NORMAL_SPEED)
+    # Bring attachment to mid position
+    await motor.run_for_degrees(port.D, ATTACHMENT_UP_POSITION, NORMAL_SPEED)
 
 
 runloop.run(main())
