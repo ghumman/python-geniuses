@@ -4,14 +4,13 @@ import runloop
 import motor_pair
 import motor
 
-NORMAL_SPEED = 180
+NORMAL_SPEED = 360
 ATTACHMENT_UP_POSITION = 170
 TURN_SPEED = 80
 FIRST_TURN_ANGLE = 50
 SECOND_TURN_ANGLE = -20
 THIRD_TURN_ANGLE = 120
 FOURTH_TURN_ANGLE = 170
-
 
 
 async def left_turn(pair, degrees, speed=TURN_SPEED):
@@ -64,12 +63,12 @@ async def main():
     await left_turn(motor_pair.PAIR_1, FIRST_TURN_ANGLE)
 
     # Move forward
-    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 220, 0, velocity=NORMAL_SPEED)
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 200, 0, velocity=NORMAL_SPEED)
     motor_pair.stop(motor_pair.PAIR_1)
 
     # Move backward
     await motor_pair.move_for_degrees(motor_pair.PAIR_1, -70, 0, velocity=NORMAL_SPEED)
-    motor_pair.stop(motor_pair.PAIR_1)
+    # motor_pair.stop(motor_pair.PAIR_1)
 
     # Bring attachment to mid position
     await motor.run_for_degrees(port.D, ATTACHMENT_UP_POSITION - 110, NORMAL_SPEED)
@@ -94,6 +93,18 @@ async def main():
     # Bring attachment to down position
     await motor.run_for_degrees(port.D, -170, NORMAL_SPEED)    
     await motor.run_for_degrees(port.D, -50, NORMAL_SPEED)
+
+    # Move backward
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, -250, 0, velocity=NORMAL_SPEED)
+
+    # Bring attachment to up position
+    await motor.run_for_degrees(port.D, 170, NORMAL_SPEED)
+
+    # Make right turn using yaw
+    await left_turn(motor_pair.PAIR_1, FOURTH_TURN_ANGLE)
+
+    # Move forward
+    await motor_pair.move_for_degrees(motor_pair.PAIR_1, 600, 0, velocity=NORMAL_SPEED)
 
 
 
